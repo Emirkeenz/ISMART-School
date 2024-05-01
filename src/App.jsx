@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './index.css';
+
 import HomePage from './app/pages/home/home';
+import Subcategory from './app/pages/subcategory';
 import Participants from './admin/pages/Participants';
 import Team from './admin/pages/Team';
 import Categories from './admin/pages/Categories';
+import './index.css';
 
 function App() {
   return (
@@ -13,6 +15,7 @@ function App() {
         <Route path="/admin/participants" element={<Participants />} />
         <Route path="/admin/team" element={<Team />} />
         <Route path="/admin/categories" element={<Categories />} />
+        <Route path="/subcategory/:id" element={<Subcategory />} />
       </Routes>
     </BrowserRouter>
   );
