@@ -1,75 +1,94 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import competitions from "../../competitions.json"
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import competitions from '../../competitions.json';
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+// import Card from 'react-bootstrap/Card';
 
 const List = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
-  padding: auto;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin-bottom: 35px;
+
+  @media (max-width: 970px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 450px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
-const Item = styled.div`
-  background-color: #eeeee6;
-  padding: 20px;
-  border-radius: 20px;
+const CardItem = styled.div`
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  background-color: #dbdbdb;
+  padding: 15px;
+  border-radius: 15px;
+`;
+
+const CardImg = styled.img`
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+`;
+
+const CardBody = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
 `;
 
 const CompetitionListItem = () => {
-  let cardArr = [];
-  cardArr = competitions;
   return (
-    <div style={{textAlign:'center', padding:'60px 25px'}}>
-      <h2 style={{color: 'black', fontSize: '56px', marginBottom:'15px'}}>Competitions List</h2>
-      <List>
-        {cardArr.map((eachCard, index)=>(
-          <div key={eachCard.id} className='col-md-3' style={{marginBottom:'4%'}}>
-            <Card style={{ width: '1fr', height:'auto', border:'1px solid black', textAlign:'center', borderRadius:'15px', padding:'15px'}}>
-              <Card.Img style={{height:'180px'}} variant="top" src={eachCard.image} />
-              <Card.Body>
-                  <Card.Title>{eachCard.name}</Card.Title>
-                  <Card.Text>{eachCard.text}</Card.Text>
-                  <Link to={`/subcategory/${eachCard.id}`} style={{textDecoration:'none', color:'#1a1a1a'}}><Button variant="primary" style={{width:'75%', border: '1px solid #dbdbdb', background:'#c6c6c6', padding:'10px 15px', borderRadius:'15px'}}>Перейти</Button></Link>
-              </Card.Body>
-            </Card>
-          </div>
-        ))}
-      </List>
+    <div style={{ padding: '25px 0' }}>
+      {Object.keys(competitions).map((category) => (
+        <div key={category} style={{ width: '100%', textAlign: 'center' }}>
+          <h1 style={{ color: 'black', marginBottom: '15px', fontSize: '32px' }}>{category}</h1>
+          <List>
+            {competitions[category].map((eachCard) => (
+              <CardItem key={eachCard.id}>
+                <CardImg variant="top" src={eachCard.image} />
+                <CardBody>
+                  <h2>{eachCard.name}</h2>
+                  <Link
+                    to={`/subcategory/${eachCard.id}`}
+                    style={{
+                      textDecoration: 'none',
+                      color: '#1a1a1a',
+                      width: '80%',
+                      transition: 'none'
+                    }}>
+                    <Button
+                      variant="primary"
+                      style={{
+                        width: '100%',
+                        background: '#000F38',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: '15px'
+                      }}>
+                      Перейти
+                    </Button>
+                  </Link>
+                </CardBody>
+              </CardItem>
+            ))}
+          </List>
+        </div>
+      ))}
     </div>
   );
 };
 
 export default CompetitionListItem;
-
-// const [menuProduct, setMenuProduct] = useState([]);
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await fetch("../../competitions.json");
-//         if (!response.ok) {
-//           throw new Error('Failed to fetch competitions');
-//         }
-//         const data = await response.json();
-//         setMenuProduct(data);
-//       } catch (error) {
-//         console.error("Error fetching data:", error);
-//       }
-//     };
-
-//     fetchData();
-//   }, []);
-
-
-// {menuProduct.map((competition) => (
-//   <Item key={competition.id}>
-//     <Link to={`/competition/${competition.id}`} />
-//     <img src={competition.image} alt="image" />
-//     <h2>{competition.name}</h2>
-//     <button className="addCart">Add to cart</button>
-//   </Item>
-// ))}

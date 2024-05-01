@@ -5,6 +5,13 @@
   font-family: sans-serif;
 }
 
+.container {
+  width: 100%;
+  height: auto;
+  text-align: center;
+  padding: 25px 0;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

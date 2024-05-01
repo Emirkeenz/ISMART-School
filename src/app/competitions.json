@@ -1,22 +1,65 @@
-[
-  {
+{
+  "Lego EV3": [
+    {
     "id": 1,
-    "name": "Lego EV3",
+    "name": "Sumo",
     "image": "https://ismartolympiad.org/static/media/ev3.10976e3b6f622ef61043.jpeg"
-  }, 
-  {
-    "id": 2,
-    "name": "Drone",
-    "image": "https://ismartolympiad.org/static/media/img2.520a0f8fd13ff3953eaa.jpeg"
-  },
-  {
-    "id": 3,
-    "name": "Goldberga",
-    "image": "https://ismartolympiad.org/static/media/img5.6881646692b40234fc23.jpeg"
-  },
-  {
-    "id": 4,
-    "name": "Lego WeD0 2.0",
-    "image": "https://ismartolympiad.org/static/media/wedo.5f90d1c33c533ee40e7f.jpeg"
-  }
-]
+    }, 
+    {
+      "id": 2,
+      "name": "Line follower",
+      "image": "https://ismartolympiad.org/static/media/img2.520a0f8fd13ff3953eaa.jpeg"
+    },
+    {
+      "id": 3,
+      "name": "Goldberga",
+      "image": "https://ismartolympiad.org/static/media/img5.6881646692b40234fc23.jpeg"
+    },
+    {
+      "id": 4,
+      "name": "Lego WeD0 2.0",
+      "image": "https://ismartolympiad.org/static/media/wedo.5f90d1c33c533ee40e7f.jpeg"
+    }
+  ],
+  "Drone": [
+    {
+      "id": 5,
+      "name": "Соревнования дронов",
+      "image": "https://ismartolympiad.org/static/media/ev3.10976e3b6f622ef61043.jpeg"
+    }, 
+    {
+      "id": 6,
+      "name": "Дрон-рейсинг",
+      "image": "https://ismartolympiad.org/static/media/img2.520a0f8fd13ff3953eaa.jpeg"
+    }
+  ],
+  "Миникубок Голдберга": [
+    {
+      "id": 7,
+      "name": "Миникубок Голдберга",
+      "image": "https://ismartolympiad.org/static/media/ev3.10976e3b6f622ef61043.jpeg"
+    }
+  ],
+  "LEGO WEDO 2.0": [
+    {
+      "id": 8,
+      "name": "Гонка",
+      "image": "https://ismartolympiad.org/static/media/ev3.10976e3b6f622ef61043.jpeg"
+    }, 
+    {
+      "id": 9,
+      "name": "Перетягивание каната",
+      "image": "https://ismartolympiad.org/static/media/img2.520a0f8fd13ff3953eaa.jpeg"
+    },
+    {
+      "id": 10,
+      "name": "Сборка Майло",
+      "image": "https://ismartolympiad.org/static/media/img5.6881646692b40234fc23.jpeg"
+    },
+    {
+      "id": 11,
+      "name": "Вездеход-полоса препятствий",
+      "image": "https://ismartolympiad.org/static/media/wedo.5f90d1c33c533ee40e7f.jpeg"
+    }
+  ]
+}
