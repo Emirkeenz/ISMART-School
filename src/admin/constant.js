@@ -6,7 +6,7 @@ export const sidebarData = [
   {
     icon: <FaUser fontSize={20} color="white" />,
     title: 'Participants',
-    route: '/admin/Participants'
+    route: '/admin/participants'
   },
   { icon: <RiTeamFill fontSize={24} color="white" />, title: 'Teams', route: '/admin/team' },
   {
