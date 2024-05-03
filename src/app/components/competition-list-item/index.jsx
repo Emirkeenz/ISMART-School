@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import competitions from '../../competitions.json';
 import Button from 'react-bootstrap/Button';
+import { fetchCategoriesList } from '../../../redux/categories/reducer';
+import { selectCategoriesList } from '../../../redux/categories/slice';
 
 const List = styled.div`
   width: 100%;

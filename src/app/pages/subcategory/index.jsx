@@ -7,7 +7,6 @@ import styled from 'styled-components';
 
 const SubcategoryDescription = styled.div`
   width: 100%;
-  height: auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 15px;
@@ -17,9 +16,11 @@ const SubcategoryDescription = styled.div`
 
 const Description = styled.div`
   width: 100%;
+  height: 150px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
 `;
 
 const DescriptionItem = styled.div`
@@ -31,10 +32,6 @@ const DescriptionItem = styled.div`
   border-radius: 10px;
   padding: 10px 15px;
 `;
-
-// const Text = styled.p`
-//   color: #000;
-// `;
 
 const TeamsListContainer = styled.div`
   width: 100%;
@@ -85,7 +82,7 @@ const Subcategory = () => {
         </Description>
       </SubcategoryDescription>
       <TeamsListContainer>
-        <h2>Participants List</h2>
+        <p style={{ color: '#000' }}>Список команд</p>
         <TeamsList>
           <Team>
             <span>School 24</span>
