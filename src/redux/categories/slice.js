@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchCategoriesList } from './reducer';
+import { getState } from '../store';
 
 export const categorySlice = createSlice({
   name: 'category',
@@ -26,6 +27,6 @@ export const categorySlice = createSlice({
   }
 });
 
-export const selectCategoriesList = (state) => state.category.categoriesList;
+export const selectCategoriesList = () => getState.categoriesList;
 
 export default categorySlice.reducer;

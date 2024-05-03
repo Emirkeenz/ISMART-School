@@ -3,7 +3,7 @@ import api from '../../service/api/api';
 
 export const fetchCategoriesList = createAsyncThunk('category/fetchCategoriesList', async () => {
   try {
-    const response = await api.category.getCategoriesList();
+    const response = await api.categories.getCategoriesList();
     return response.data;
   } catch (error) {
     console.error(error);

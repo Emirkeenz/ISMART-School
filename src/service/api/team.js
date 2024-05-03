@@ -1,3 +1,5 @@
+import { client } from '../axios';
+
 class Team {
   getTeamList() {
     return client.get('/team');
@@ -5,7 +7,7 @@ class Team {
   createTeam(data) {
     return client.post('/team', data);
   }
-  deleteTeam() {
+  deleteTeam(id) {
     return client.delete(`/team/${id}`);
   }
   updateTeam({ id, data }) {

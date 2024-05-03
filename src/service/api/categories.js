@@ -1,6 +1,9 @@
+import { client } from '../axios';
+
 class Categories {
+  const;
   getCategoriesList() {
-    return client.get('/categories');
+    return client.get('games/categories');
   }
 }
 
