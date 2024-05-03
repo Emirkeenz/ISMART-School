@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchCategoriesList } from './categoryReducer'; // Импортируем наше асинхронное действие
+import { fetchCategoriesList } from './reducer';
 
 export const categorySlice = createSlice({
   name: 'category',

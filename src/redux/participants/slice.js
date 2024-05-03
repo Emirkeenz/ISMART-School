@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {getParticipantsList} from "./reducer";
+import { getParticipantsList } from './reducer';
 
 export const participantsSlice = createSlice({
   name: 'participants',
@@ -7,7 +7,7 @@ export const participantsSlice = createSlice({
     loading: false,
     success: false,
     error: false,
-    participantsList: [],
+    participantsList: []
   },
   reducers: {},
   extraReducers: (builder) => {

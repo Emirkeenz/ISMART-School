@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import competitions from '../../competitions.json';
 import Button from 'react-bootstrap/Button';
 import { fetchCategoriesList } from '../../../redux/categories/reducer';
 import { selectCategoriesList } from '../../../redux/categories/slice';
@@ -52,19 +51,26 @@ const CardBody = styled.div`
 `;
 
 const CompetitionListItem = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCategoriesList());
+  }, [dispatch]);
+
+  const categoriesList = useSelector(selectCategoriesList);
   return (
     <div style={{ padding: '25px 0' }}>
-      {Object.keys(competitions).map((category) => (
-        <div key={category} style={{ width: '100%', textAlign: 'center' }}>
-          <h1 style={{ color: 'black', marginBottom: '15px', fontSize: '32px' }}>{category}</h1>
+      {categoriesList.map((category) => (
+        <div key={category.id} style={{ width: '100%', textAlign: 'center' }}>
+          <h1>{category.name}</h1>
           <List>
-            {competitions[category].map((eachCard) => (
-              <CardItem key={eachCard.id}>
-                <CardImg variant="top" src={eachCard.image} />
+            {category.teams.map((eachTeam) => (
+              <CardItem key={eachTeam.id}>
+                <CardImg variant="top" src={eachTeam.photo} />
                 <CardBody>
-                  <h2>{eachCard.name}</h2>
+                  <h2>{eachTeam.name}</h2>
                   <Link
-                    to={`/subcategory/${eachCard.id}`}
+                    to={`/subcategory/${eachTeam.id}`}
                     style={{
                       textDecoration: 'none',
                       color: '#1a1a1a',
