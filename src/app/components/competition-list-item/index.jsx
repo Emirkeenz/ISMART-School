@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import competitions from '../../competitions.json';
 import Button from 'react-bootstrap/Button';
-// import Card from 'react-bootstrap/Card';
 
 const List = styled.div`
   width: 100%;

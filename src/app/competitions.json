@@ -1,9 +1,27 @@
 {
   "Lego EV3": [
     {
-    "id": 1,
-    "name": "Sumo",
-    "image": "https://ismartolympiad.org/static/media/ev3.10976e3b6f622ef61043.jpeg"
+      "id": 1,
+      "name": "Sumo",
+      "image": "https://ismartolympiad.org/static/media/ev3.10976e3b6f622ef61043.jpeg",
+      "teams": [
+        {
+          "team": "24 school",
+          "score": 35
+        },
+        {
+          "team": "26 school",
+          "score": 45
+        },
+        {
+          "team": "13 school",
+          "score": 42
+        },
+        {
+          "team": "61 school",
+          "score": 43
+        }
+      ]
     }, 
     {
       "id": 2,
@@ -12,12 +30,12 @@
     },
     {
       "id": 3,
-      "name": "Goldberga",
+      "name": "Кегель ринг",
       "image": "https://ismartolympiad.org/static/media/img5.6881646692b40234fc23.jpeg"
     },
     {
       "id": 4,
-      "name": "Lego WeD0 2.0",
+      "name": "Кок-бору",
       "image": "https://ismartolympiad.org/static/media/wedo.5f90d1c33c533ee40e7f.jpeg"
     }
   ],
