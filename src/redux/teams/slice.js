@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getTeamsList } from './reducer';
+import { getState } from '../store';
 
 export const teamSlice = createSlice({
   name: 'team',
@@ -19,6 +20,6 @@ export const teamSlice = createSlice({
   }
 });
 
-export const selectTeamList = (state) => state.team.teamList();
+export const selectTeamList = () => getState;
 
-export default teamSlice.reducer;
+export default teamSlice;

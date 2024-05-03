@@ -1,3 +1,5 @@
+import { client } from '../axios';
+
 class Participants {
   getParticipantsList() {
     return client.get('/participants');
@@ -6,7 +8,7 @@ class Participants {
   createParticipant(data) {
     return client.post('/participants', data);
   }
-  deleteParticipant() {
+  deleteParticipant(id) {
     return client.delete(`/participants/${id}`);
   }
   updateParticipant({ id, data }) {

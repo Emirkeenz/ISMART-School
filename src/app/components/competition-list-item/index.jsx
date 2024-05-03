@@ -60,7 +60,7 @@ const CompetitionListItem = () => {
   const categoriesList = useSelector(selectCategoriesList);
   return (
     <div style={{ padding: '25px 0' }}>
-      {categoriesList.map((category) => (
+      {categoriesList?.map((category) => (
         <div key={category.id} style={{ width: '100%', textAlign: 'center' }}>
           <h1>{category.name}</h1>
           <List>
