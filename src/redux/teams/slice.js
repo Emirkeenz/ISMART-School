@@ -20,6 +20,6 @@ export const teamSlice = createSlice({
   }
 });
 
-export const selectTeamList = () => getState;
+export const selectTeamList = () => getState.team;
 
 export default teamSlice;

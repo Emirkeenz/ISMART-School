@@ -50,6 +50,32 @@ const CardBody = styled.div`
   gap: 5px;
 `;
 
+// const CategoryItem = styled.div`
+//   height: auto;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   gap: 15px;
+//   background-color: #dbdbdb;
+//   padding: 15px;
+//   border-radius: 15px;
+// `;
+
+// const CategoryImg = styled.img`
+//   height: 180px;
+//   object-fit: cover;
+//   border-radius: 10px;
+// `;
+
+// const CategoryBody = styled.div`
+//   width: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   gap: 5px;
+// `;
+
 const CompetitionListItem = () => {
   const dispatch = useDispatch();
 
@@ -96,6 +122,18 @@ const CompetitionListItem = () => {
         </div>
       ))}
     </div>
+    // <div style={{ padding: '25px 0' }}>
+    //   <List>
+    //     {categoriesList?.map((category) => (
+    //       <CategoryItem key={category.id}>
+    //         <CategoryImg variant="top" src={category.photo} />
+    //         <CategoryBody>
+    //           <h2>{category.name}</h2>
+    //         </CategoryBody>
+    //       </CategoryItem>
+    //     ))}
+    //   </List>
+    // </div>
   );
 };
 
