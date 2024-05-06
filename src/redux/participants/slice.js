@@ -20,6 +20,6 @@ export const participantsSlice = createSlice({
   }
 });
 
-export const selectParticipantsList = () => getState.participantsList;
+export const selectParticipantsList = () => getState.participants.participantsList;
 
 export default participantsSlice.reducer;

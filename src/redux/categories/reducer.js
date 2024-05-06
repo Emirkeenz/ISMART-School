@@ -10,3 +10,17 @@ export const fetchCategoriesList = createAsyncThunk('category/fetchCategoriesLis
     throw error;
   }
 });
+
+export const fetchCategory = createAsyncThunk(
+  'category/fetchCategory',
+  async ({ id, data }, { dispatch }) => {
+    try {
+      const response = await api.categories.getCategory({ id, data });
+      dispatch(getParticipantsList());
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+);
