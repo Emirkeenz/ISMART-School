@@ -1,39 +1,58 @@
-import { FaUser } from 'react-icons/fa';
-import { RiTeamFill } from 'react-icons/ri';
-import { BiSolidCategory } from 'react-icons/bi';
-
-export const sidebarData = [
-  {
-    icon: <FaUser fontSize={20} color="white" />,
-    title: 'Participants',
-    route: '/admin/participants'
-  },
-  { icon: <RiTeamFill fontSize={24} color="white" />, title: 'Teams', route: '/admin/team' },
-  {
-    icon: <BiSolidCategory fontSize={24} color="white" />,
-    title: 'Categories',
-    route: '/admin/categories'
-  }
-];
-
 export const participantsFields = [
   { name: 'first_name', label: 'First name' },
   { name: 'last_name', label: 'Last name' },
   { name: 'phone_number', label: 'Phone number' }
 ];
 
-export const teamFields = [
-  { name: 'name', label: 'Name' },
-  { name: 'subcategory', label: 'Subcategory' },
-  { name: 'participants', label: 'Participants' },
-  { name: 'school', label: 'School' }
+export const mockTeamData = [
+  {
+    id: 1,
+    name: 'Team A',
+    subcategory: 'Subcategory A',
+    participant: 'Participant A',
+    school: 'School A'
+  },
+  {
+    id: 2,
+    name: 'Team B',
+    subcategory: 'Subcategory B',
+    participant: 'Participant B',
+    school: 'School B'
+  },
+  {
+    id: 3,
+    name: 'Team C',
+    subcategory: 'Subcategory C',
+    participant: 'Participant C',
+    school: 'School C'
+  },
+  {
+    id: 4,
+    name: 'Team D',
+    subcategory: 'Subcategory D',
+    participant: 'Participant D',
+    school: 'School D'
+  },
+  {
+    id: 5,
+    name: 'Team E',
+    subcategory: 'Subcategory E',
+    participant: 'Participant E',
+    school: 'School E'
+  }
 ];
 
 export const participantsTableHead = [
-  { id: 'first_name', title: 'First Name' },
-  { id: 'last_name', title: 'Last Name' },
-  { id: 'phone_number', title: 'Phone number' }
+  { id: 'id', title: '№' },
+  { id: 'team', title: 'Команда' },
+  { id: 'school', title: 'Школа' },
+  { id: 'active', title: 'Присутствует' },
+  { id: 'first_score', title: 'Попытка 1' },
+  { id: 'first_score', title: 'Попытка 2' },
+  { id: 'first_score', title: 'Попытка 3' },
+  { id: 'total', title: 'Итог' }
 ];
+
 export const participantsTableBody = [
   {
     id: 1,
@@ -62,26 +81,20 @@ export const teamTableHead = [
   { id: 'subcategory', title: 'Subcategory' }
 ];
 
-export const teamTableBody = [
+export const categoriesList = [
   {
     id: 1,
-    name: 'Team Phoenix',
-    participants: ['Alice, ', 'Bob'],
-    school: 'Oakridge High School',
-    subcategory: 'LEGO EV3'
+    photo: 'https://static.vecteezy.com/vite/assets/photo-masthead-375-b8ae1548.webp',
+    name: 'Team Phoenix'
   },
   {
     id: 2,
-    name: 'Artistic Innovators',
-    participants: ['Emma, ', 'David, ', 'Sophia '],
-    school: 'Greenwood Academy',
-    subcategory: 'DRONE'
+    photo: 'https://static.vecteezy.com/vite/assets/photo-masthead-375-b8ae1548.webp',
+    name: 'Artistic Innovators'
   },
   {
     id: 3,
-    name: 'Math Masters',
-    participants: ['James, ', 'Emily, ', 'Olivia '],
-    school: 'Maplewood Middle School',
-    subcategory: 'Миникубок Голдберга'
+    photo: 'https://static.vecteezy.com/vite/assets/photo-masthead-375-b8ae1548.webp',
+    name: 'Math Masters'
   }
 ];
