@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-// import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Button from 'react-bootstrap/Button';
-import competitions from '../../competitions.json';
-// import { fetchCategoriesList } from '../../../redux/categories/reducer';
-// import { selectCategoriesList } from '../../../redux/categories/slice';
+// import competitions from '../../competitions.json';
+import { fetchCategoriesList } from '../../../redux/categories/reducer';
+import { selectCategoriesList } from '../../../redux/categories/slice';
 
 const List = styled.div`
   width: 100%;
@@ -52,51 +52,25 @@ const CardBody = styled.div`
   padding: 15px;
 `;
 
-// const CategoryItem = styled.div`
-//   height: auto;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   gap: 15px;
-//   background-color: #dbdbdb;
-//   padding: 15px;
-//   border-radius: 15px;
-// `;
-
-// const CategoryImg = styled.img`
-//   height: 180px;
-//   object-fit: cover;
-//   border-radius: 10px;
-// `;
-
-// const CategoryBody = styled.div`
-//   width: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   gap: 5px;
-// `;
-
 const CompetitionListItem = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(fetchCategoriesList());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchCategoriesList());
+  }, [dispatch]);
 
-  // const categoriesList = useSelector(selectCategoriesList);
+  const categoriesList = useSelector(selectCategoriesList);
   return (
     <div style={{ padding: '25px 0' }}>
-      {Object.keys(competitions).map((category) => (
-        <div key={category} style={{ width: '100%', textAlign: 'center' }}>
+      {categoriesList?.map((category) => (
+        <div key={category.id} style={{ width: '100%', textAlign: 'center' }}>
           <h1 style={{ color: 'black', marginBottom: '15px', fontSize: '38px', fontWeight: '600' }}>
-            {category}
+            {category.name}
           </h1>
           <List>
-            {competitions[category].map((eachCard) => (
+            {category.teams.map((eachCard) => (
               <CardItem key={eachCard.id}>
-                <CardImg variant="top" src={eachCard.image} />
+                <CardImg variant="top" src={eachCard.photo} />
                 <CardBody>
                   <h2 style={{ fontSize: '22px' }}>{eachCard.name}</h2>
                   <Link
