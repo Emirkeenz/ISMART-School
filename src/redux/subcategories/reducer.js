@@ -13,17 +13,3 @@ export const fetchSubcategoriesList = createAsyncThunk(
     }
   }
 );
-
-export const fetchSubcategory = createAsyncThunk(
-  'category/fetchCategory',
-  async ({ id, data }, { dispatch }) => {
-    try {
-      const response = await api.subcategories.getSubcategory();
-      dispatch(getParticipantsList());
-      return response.data;
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  }
-);
