@@ -98,3 +98,14 @@ export const categoriesList = [
     name: 'Math Masters'
   }
 ];
+
+export const mockTeams = ['Team A', 'Team B', 'Team C', 'Team D'];
+
+export const mockResults = [
+  { match: ['Team A', 'Team B'], winner: 'Team A' },
+  { match: ['Team A', 'Team C'], winner: 'Team C' },
+  { match: ['Team A', 'Team D'], winner: null },
+  { match: ['Team B', 'Team C'], winner: null },
+  { match: ['Team B', 'Team D'], winner: null },
+  { match: ['Team C', 'Team D'], winner: null }
+];

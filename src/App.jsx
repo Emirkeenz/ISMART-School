@@ -6,6 +6,7 @@ import Auth from './admin/pages/Auth';
 import GameByTime from './admin/pages/GameByTime';
 import GameByTable from './admin/pages/GameByTable';
 import Categories from './admin/pages/Categories';
+import TournamentPage from './admin/pages/TournamentPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/admin/game-time" element={<GameByTime />} />
         <Route path="/admin/game-table" element={<GameByTable />} />
         <Route path="/admin/categories" element={<Categories />} />
+        <Route path="/tournament" element={<TournamentPage />} />
       </Routes>
     </BrowserRouter>
   );
