@@ -39,7 +39,8 @@
 }
 
 .home-text h1 {
-  font-size: 48px;
+  font-size: 64px;
+  letter-spacing: 1.4px;
   font-weight: 500;
   /* animation-name: fade; */
   animation-duration: 4s;

@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Button from 'react-bootstrap/Button';
-import { fetchCategoriesList } from '../../../redux/categories/reducer';
-import { selectCategoriesList } from '../../../redux/categories/slice';
+import competitions from '../../competitions.json';
+// import { fetchCategoriesList } from '../../../redux/categories/reducer';
+// import { selectCategoriesList } from '../../../redux/categories/slice';
 
 const List = styled.div`
   width: 100%;
@@ -31,14 +32,14 @@ const CardItem = styled.div`
   justify-content: center;
   align-items: center;
   gap: 15px;
-  background-color: #dbdbdb;
-  padding: 15px;
+  background-color: #ffffff;
   border-radius: 15px;
 `;
 
 const CardImg = styled.img`
+  width: 100%;
   height: 180px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 10px;
 `;
 
@@ -47,7 +48,8 @@ const CardBody = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 15px;
+  padding: 15px;
 `;
 
 // const CategoryItem = styled.div`
@@ -77,26 +79,28 @@ const CardBody = styled.div`
 // `;
 
 const CompetitionListItem = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchCategoriesList());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchCategoriesList());
+  // }, [dispatch]);
 
-  const categoriesList = useSelector(selectCategoriesList);
+  // const categoriesList = useSelector(selectCategoriesList);
   return (
     <div style={{ padding: '25px 0' }}>
-      {categoriesList?.map((category) => (
-        <div key={category.id} style={{ width: '100%', textAlign: 'center' }}>
-          <h1>{category.name}</h1>
+      {Object.keys(competitions).map((category) => (
+        <div key={category} style={{ width: '100%', textAlign: 'center' }}>
+          <h1 style={{ color: 'black', marginBottom: '15px', fontSize: '38px', fontWeight: '600' }}>
+            {category}
+          </h1>
           <List>
-            {category.teams.map((eachTeam) => (
-              <CardItem key={eachTeam.id}>
-                <CardImg variant="top" src={eachTeam.photo} />
+            {competitions[category].map((eachCard) => (
+              <CardItem key={eachCard.id}>
+                <CardImg variant="top" src={eachCard.image} />
                 <CardBody>
-                  <h2>{eachTeam.name}</h2>
+                  <h2 style={{ fontSize: '22px' }}>{eachCard.name}</h2>
                   <Link
-                    to={`/subcategory/${eachTeam.id}`}
+                    to={`/subcategory/${eachCard.id}`}
                     style={{
                       textDecoration: 'none',
                       color: '#1a1a1a',
@@ -107,10 +111,11 @@ const CompetitionListItem = () => {
                       variant="primary"
                       style={{
                         width: '100%',
-                        background: '#000F38',
-                        color: '#fff',
-                        border: 'none',
-                        borderRadius: '15px'
+                        background: '#f1f1f1',
+                        color: '#151515',
+                        border: '1px solid #1d1d1d',
+                        borderRadius: '8px',
+                        padding: '8px 5px'
                       }}>
                       Перейти
                     </Button>
@@ -122,18 +127,6 @@ const CompetitionListItem = () => {
         </div>
       ))}
     </div>
-    // <div style={{ padding: '25px 0' }}>
-    //   <List>
-    //     {categoriesList?.map((category) => (
-    //       <CategoryItem key={category.id}>
-    //         <CategoryImg variant="top" src={category.photo} />
-    //         <CategoryBody>
-    //           <h2>{category.name}</h2>
-    //         </CategoryBody>
-    //       </CategoryItem>
-    //     ))}
-    //   </List>
-    // </div>
   );
 };
 
