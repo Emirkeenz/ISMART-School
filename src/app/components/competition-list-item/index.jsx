@@ -35,12 +35,12 @@ const CardItem = styled.div`
   border-radius: 15px;
 `;
 
-const CardImg = styled.img`
-  width: 100%;
-  height: 180px;
-  object-fit: contain;
-  border-radius: 10px;
-`;
+// const CardImg = styled.img`
+//   width: 100%;
+//   height: 180px;
+//   object-fit: contain;
+//   border-radius: 10px;
+// `;
 
 const CardBody = styled.div`
   width: 100%;
@@ -77,7 +77,7 @@ const CompetitionListItem = () => {
                   .filter((subcategory) => subcategory.category.id === category.id)
                   .map((subcategory) => (
                     <CardItem key={subcategory.id}>
-                      <CardImg variant="top" src={subcategory.photo} />
+                      {/* <CardImg variant="top" src={subcategory.photo} /> */}
                       <CardBody>
                         <h2 style={{ fontSize: '22px' }}>{subcategory.name}</h2>
                         <Link
