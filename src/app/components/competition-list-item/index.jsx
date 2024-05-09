@@ -55,7 +55,7 @@ const CompetitionListItem = () => {
   const dispatch = useDispatch();
 
   const categoriesList = useSelector((state) => state.category.categoriesList);
-  const subcategoriesList = useSelector((state) => state.category.subcategoriesList);
+  const subcategoriesList = useSelector((state) => state.subcategory.subcategoriesList);
 
   useEffect(() => {
     dispatch(getCategoriesList());
@@ -74,7 +74,7 @@ const CompetitionListItem = () => {
             <List>
               {subcategoriesList &&
                 subcategoriesList
-                  .filter((subcategory) => subcategory.category.name === category.name)
+                  .filter((subcategory) => subcategory.category.id === category.id)
                   .map((subcategory) => (
                     <CardItem key={subcategory.id}>
                       <CardImg variant="top" src={subcategory.photo} />
