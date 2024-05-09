@@ -1,7 +1,6 @@
 import { client } from '../axios';
 
-class Subategories {
-  const;
+class Subcategories {
   getSubcategoriesList() {
     return client.get(`/games/subcategories/`);
   }
@@ -10,4 +9,4 @@ class Subategories {
   }
 }
 
-export default Subategories;
+export default Subcategories;

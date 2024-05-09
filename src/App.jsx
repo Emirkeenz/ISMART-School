@@ -15,8 +15,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/admin" element={<Auth />} />
-        <Route path="/admin/game-time" element={<GameByTime />} />
-        <Route path="/admin/game-table" element={<GameByTable />} />
+        <Route path="/admin/game-time/:id" element={<GameByTime />} />
+        <Route path="/admin/game-table/:id" element={<GameByTable />} />
         <Route path="/admin/categories" element={<Categories />} />
         <Route path="/tournament" element={<TournamentPage />} />
         <Route path="/subcategory/:id" element={<Subcategory />} />

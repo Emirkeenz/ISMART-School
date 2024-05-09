@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getParticipantsList } from './reducer';
 
-export const participantsSlice = createSlice({
+const participantsSlice = createSlice({
   name: 'participants',
   initialState: {
     loading: false,

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getTeamsList } from './reducer';
 
-export const teamSlice = createSlice({
+const teamSlice = createSlice({
   name: 'team',
   initialState: {
     loading: false,
