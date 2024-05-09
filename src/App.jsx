@@ -7,6 +7,7 @@ import GameByTime from './admin/pages/GameByTime';
 import GameByTable from './admin/pages/GameByTable';
 import Categories from './admin/pages/Categories';
 import TournamentPage from './admin/pages/TournamentPage';
+import Subcategory from './app/pages/subcategory';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/admin/game-table/:id" element={<GameByTable />} />
         <Route path="/admin/categories" element={<Categories />} />
         <Route path="/tournament" element={<TournamentPage />} />
+        <Route path="/subcategory/:id" element={<Subcategory />} />
       </Routes>
     </BrowserRouter>
   );
