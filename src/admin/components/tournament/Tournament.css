@@ -1,0 +1,46 @@
+.tournament-container {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.tournament-container h2 {
+  font-size: 24px;
+}
+
+.tournament-container h3 {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.tournament-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tournament-container ul li {
+  margin-bottom: 5px;
+}
+
+.tournament-container button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.tournament-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tournament-container th, .tournament-container td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.tournament-container td button {
+  margin-right: 5px;
+}
