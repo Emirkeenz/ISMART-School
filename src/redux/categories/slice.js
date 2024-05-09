@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchCategoriesList } from './reducer';
-import { getState } from '../store';
+import { getCategoriesList } from './reducer';
 
-export const categorySlice = createSlice({
+const categorySlice = createSlice({
   name: 'category',
   initialState: {
     loading: false,
@@ -12,21 +11,19 @@ export const categorySlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchCategoriesList.pending, (state) => {
+      .addCase(getCategoriesList.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchCategoriesList.fulfilled, (state, action) => {
+      .addCase(getCategoriesList.fulfilled, (state, action) => {
         state.loading = false;
         state.categoriesList = action.payload;
       })
-      .addCase(fetchCategoriesList.rejected, (state, action) => {
+      .addCase(getCategoriesList.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
   }
 });
 
-export default categorySlice.reducer;
-
-export const selectCategoriesList = () => getState.category;
+export default categorySlice;

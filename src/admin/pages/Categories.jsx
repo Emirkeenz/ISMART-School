@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
 import styled from 'styled-components';
-import { categoriesList } from '../constant';
-import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
+import { getSubcategoriesList } from '../../redux/subcategories/reducer';
+import { subcategoriesForGameByTime } from '../constant';
 
 const List = styled.div`
   width: 100%;
@@ -49,18 +51,36 @@ const CategoryBody = styled.div`
 `;
 
 const Categories = () => {
+  const dispatch = useDispatch();
+  const subcategoryList = useSelector((state) => state.subcategory.subcategoriesList);
+  const navigate = useNavigate();
+
+  console.log(subcategoryList);
+
+  const referToGamePage = (subcategory) => {
+    if (subcategoriesForGameByTime.includes(subcategory.name)) {
+      navigate(`/admin/game-time/${subcategory.id}`);
+    } else {
+      navigate(`/admin/game-table/${subcategory.id}`);
+    }
+  };
+
+  useEffect(() => {
+    dispatch(getSubcategoriesList());
+  }, []);
+
   return (
     <div>
       <div style={{ padding: '25px 0' }}>
         <List>
-          {categoriesList?.map((category) => (
-            <CategoryItem key={category.id}>
-              <CategoryImg variant="top" src={category.photo} />
+          {subcategoryList.map((subcategory) => (
+            <CategoryItem key={subcategory.id}>
+              <CategoryImg variant="top" src={subcategory.photo} />
               <CategoryBody>
-                <h2>{category.name}</h2>
+                <h2>{subcategory.name}</h2>
               </CategoryBody>
-              <Link
-                to={`/admin/game-time`}
+              <div
+                onClick={() => referToGamePage(subcategory)}
                 style={{
                   textDecoration: 'none',
                   color: '#1a1a1a',
@@ -78,7 +98,7 @@ const Categories = () => {
                   }}>
                   Перейти
                 </Button>
-              </Link>
+              </div>
             </CategoryItem>
           ))}
         </List>

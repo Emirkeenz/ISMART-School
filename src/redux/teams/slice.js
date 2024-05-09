@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getTeamsList } from './reducer';
-import { getState } from '../store';
 
-export const teamSlice = createSlice({
+const teamSlice = createSlice({
   name: 'team',
   initialState: {
     loading: false,
@@ -19,7 +18,5 @@ export const teamSlice = createSlice({
     });
   }
 });
-
-export const selectTeamList = () => getState.team;
 
 export default teamSlice;

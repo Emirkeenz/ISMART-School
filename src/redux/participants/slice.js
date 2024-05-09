@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getParticipantsList } from './reducer';
-import { getState } from '../store';
 
-export const participantsSlice = createSlice({
+const participantsSlice = createSlice({
   name: 'participants',
   initialState: {
     loading: false,
@@ -20,6 +19,4 @@ export const participantsSlice = createSlice({
   }
 });
 
-export const selectParticipantsList = () => getState.participants.participantsList;
-
-export default participantsSlice.reducer;
+export default participantsSlice;

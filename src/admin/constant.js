@@ -43,14 +43,14 @@ export const mockTeamData = [
 ];
 
 export const participantsTableHead = [
-  { id: 'id', title: '№' },
-  { id: 'team', title: 'Команда' },
-  { id: 'school', title: 'Школа' },
-  { id: 'active', title: 'Присутствует' },
-  { id: 'first_score', title: 'Попытка 1' },
-  { id: 'first_score', title: 'Попытка 2' },
-  { id: 'first_score', title: 'Попытка 3' },
-  { id: 'total', title: 'Итог' }
+  '№',
+  'Команда',
+  'Школа',
+  'Присутствует',
+  'Попытка 1',
+  'Попытка 2',
+  'Попытка 3',
+  'Итог'
 ];
 
 export const participantsTableBody = [
@@ -97,4 +97,14 @@ export const categoriesList = [
     photo: 'https://static.vecteezy.com/vite/assets/photo-masthead-375-b8ae1548.webp',
     name: 'Math Masters'
   }
+];
+
+export const subcategoriesForGameByTime = [
+  'Line Follower',
+  'Кегель ринг',
+  'Соревнования дронов',
+  'Дрон-рейсинг',
+  'Гонки',
+  'Сборка "Майло"',
+  'Вездеход-полоса препятствий'
 ];

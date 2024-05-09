@@ -1,12 +1,8 @@
 import { client } from '../axios';
 
 class Categories {
-  const;
-  getCategoriesList() {
+  getCategoriesListApi() {
     return client.get(`/games/categories/`);
-  }
-  getCategory({ id }) {
-    return client.get(`/games/categories/${id}`);
   }
 }
 
