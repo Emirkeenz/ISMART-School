@@ -9,7 +9,7 @@ const gameSlice = createSlice({
     gameList: []
   },
   reducers: {
-    clear(state) {
+    clearGameList(state) {
       state.gameList = [];
     }
   },
@@ -30,6 +30,6 @@ const gameSlice = createSlice({
   }
 });
 
-export const { clear } = gameSlice.actions;
+export const { clearGameList } = gameSlice.actions;
 
 export default gameSlice;
