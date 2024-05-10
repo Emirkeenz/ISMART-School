@@ -14,7 +14,7 @@ const teamSlice = createSlice({
     builder.addCase(getTeamsList.fulfilled, (state, action) => {
       state.loading = false;
       state.error = null;
-      state.teamList = action.payload;
+      state.teamList = action.payload.results;
     });
   }
 });

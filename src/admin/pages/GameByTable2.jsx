@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { categoriesList, categoriesListHead } from '../constant';
 
 const GameByTable2 = () => {
@@ -13,40 +13,35 @@ const GameByTable2 = () => {
   // }, [value]);
 
   // let matrix = [];
+  const onChangeValue = (col_idx, row_idx, value, field, game_id) => {
+    matrix[row_idx][col_idx][field] = value;
+    setMatrix([...matrix.map((row) => [...row])]);
+    const data = {
+      id: game_id,
+      [field]: value
+    };
+    console.log(data);
+  };
 
   // Fill matrix with absolute difference of scores
-  for (let i = 0; i < categoriesList.length; i++) {
-    matrix[i] = [];
-    for (let j = 0; j < categoriesList.length; j++) {
-      matrix[i][j] = {
-        id: categoriesList[i].id,
-        team1: categoriesList[i].team1,
-        team2: categoriesList[j].team2,
-        score_team1: categoriesList[i].score_team1,
-        score_team2: categoriesList[j].score_team2
-      };
+  useEffect(() => {
+    let matrix = [];
+    for (let i = 0; i < categoriesList.length; i++) {
+      matrix[i] = [];
+      for (let j = 0; j < categoriesList.length; j++) {
+        matrix[i][j] = {
+          id: categoriesList[i].id,
+          team1: categoriesList[i].team1,
+          team2: categoriesList[j].team2,
+          score_team1: categoriesList[i].score_team1,
+          score_team2: categoriesList[j].score_team2
+        };
+      }
     }
-  }
-  // console.log(matrix);
+    setMatrix(matrix);
+  }, []);
 
-  const onChangeValue = (col_idx, value, field, row_idx) => {
-    setMatrix((prevMatrix) => {
-      return prevMatrix.map((row, rowIndex) => {
-        if (rowIndex === row_idx) {
-          return row.map((col, colIndex) => {
-            if (colIndex === col_idx) {
-              return {
-                ...col,
-                [field]: value
-              };
-            }
-            return col;
-          });
-        }
-        return row;
-      });
-    });
-  };
+  // console.log(matrix);
 
   return (
     <div>
@@ -62,7 +57,7 @@ const GameByTable2 = () => {
           {matrix.map((row, idx) => (
             <tr key={row.id}>
               <td>
-                <p className="w-40 font-bold">{row.team1}</p>
+                <p className="w-40 font-bold">{row[1].team1.name}</p>
               </td>
               {row.map((col, col_index) => (
                 <td key={col.id}>
@@ -73,7 +68,7 @@ const GameByTable2 = () => {
                         <input
                           className="border h-full w-10 m-1 text-center"
                           onChange={(e) => {
-                            onChangeValue(col_index, e.target.value, 'score_team1', idx);
+                            onChangeValue(col_index, idx, e.target.value, 'score_team1', col.id);
                           }}
                           value={col.score_team1}
                           type="text"
@@ -82,7 +77,7 @@ const GameByTable2 = () => {
                         <input
                           className="border h-full w-10 m-1 text-center"
                           onChange={(e) => {
-                            onChangeValue(col.id, e.target.value, 'score_team2', idx);
+                            onChangeValue(col_index, idx, e.target.value, 'score_team2', col.id);
                           }}
                           value={col.score_team2}
                           type="text"
@@ -92,6 +87,9 @@ const GameByTable2 = () => {
                   </div>
                 </td>
               ))}
+              <td>
+                <p className="w-40 font-bold">{row[idx].team1.round_robin_total}</p>
+              </td>
             </tr>
           ))}
         </tbody>

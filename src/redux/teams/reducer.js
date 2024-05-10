@@ -2,9 +2,9 @@ import api from '../../service/api/api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getAllGamesByTimeList } from '../game/reducer';
 
-export const getTeamsList = createAsyncThunk('team/getTeamsList', async () => {
+export const getTeamsList = createAsyncThunk('team/getTeamsList', async ({ params }) => {
   try {
-    const response = await api.team.getTeamList();
+    const response = await api.team.getTeamList(params);
     return response.data;
   } catch (error) {
     console.error(error);
