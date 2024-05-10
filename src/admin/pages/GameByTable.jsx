@@ -1,46 +1,68 @@
-import React, { useState } from 'react';
-import { categoriesList } from '../constant';
+import React, { useEffect, useState } from 'react';
+import { categoriesList, categoriesListHead } from '../constant';
 
 const GameByTable = () => {
-  const [message, setMessage] = useState('');
-  const [items, setItems] = useState([]);
+  const [value, setValue] = useState();
+  const [team1, setTeam1] = useState();
+  const [team2, setTeam2] = useState();
 
-  const updateMessage = (event) => {
-    setMessage(event.target.value);
-  };
-
-  const handleClick = () => {
-    setItems([...items, message]);
-    setMessage('');
-  };
+  useEffect(() => {
+    if (value) console.log(value, team1, team2);
+    setValue(0);
+  }, [value]);
 
   return (
     <div>
       <table className="">
         <thead>
           <tr>
-            {categoriesList.map((item) => (
-              <th key={item.id}>{item.name}</th>
+            {categoriesListHead.map((item) => (
+              <th key={item.id}>{item.team1?.name}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {categoriesList.map((item) => (
-            <tr key={item.id}>
-              <td>{item.name}</td>
+          {categoriesList.map((row) => (
+            <tr key={row.id}>
               <td>
-                <input className="border-2" type="text" />
+                <p className="w-40 font-bold">{row.team1.name}</p>
               </td>
-              <td>
-                <input className="border-2" type="text" />
-              </td>
+              {categoriesList.map((col, index) => (
+                <td key={col.id}>
+                  <div
+                    className={`border-2 h-16 p-3 flex items-center ${row.id === categoriesListHead[index + 1]?.id && 'bg-amber-200'}`}>
+                    {row.id !== categoriesListHead[index + 1].id && (
+                      <>
+                        <input
+                          className="border h-full w-10 m-1 text-center"
+                          onChange={(e) => {
+                            setTeam1(row);
+                            setTeam2(categoriesListHead[index + 1]);
+                            setValue(e.target.value);
+                          }}
+                          value={col.score_team1}
+                          type="text"
+                        />
+                        :
+                        <input
+                          className="border h-full w-10 m-1 text-center"
+                          onChange={(e) => {
+                            setTeam1(row);
+                            setTeam2(categoriesListHead[index + 1]);
+                            setValue(e.target.value);
+                          }}
+                          value={col.score_team2}
+                          type="text"
+                        />
+                      </>
+                    )}
+                  </div>
+                </td>
+              ))}
             </tr>
           ))}
         </tbody>
       </table>
-      <hr />
-      <input type="text" value={message} onChange={updateMessage} />
-      <button onClick={handleClick}>Add Item</button>
     </div>
   );
 };

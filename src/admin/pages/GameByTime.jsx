@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeGameByTimeValue, getAllGamesByTimeList } from '../../redux/game/reducer';
 import { useDebounce } from '../../utils/debounce';
 import { updateTeam } from '../../redux/teams/reducer';
+import { useParams } from 'react-router-dom';
 
 const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -23,13 +24,20 @@ const GameByTime = () => {
   // const teamList = useSelector((state) => state.team.teamList);
   const gameList = useSelector((state) => state.game.gameList);
   const [timeValue, setTimeValue] = useState({ name: '', value: 0, id: 0 });
-  const debouncedCurrentValue = useDebounce(timeValue.value, 500);
+  const [data] = useState(gameList);
+  const debouncedCurrentValue = useDebounce(timeValue.value, 1000);
+  const { id } = useParams();
 
-  const onChangeStatusIsVisited = (value, id) => {
+  const params = {
+    team__subcategory: id
+    // team__is_arrived: true
+  };
+
+  const onChangeStatusIsVisited = (value, game_id) => {
     const data = {
       is_arrived: value
     };
-    dispatch(updateTeam({ id, data }));
+    dispatch(updateTeam({ id: game_id, data, category_id: id }));
     console.log(data);
   };
 
@@ -37,7 +45,7 @@ const GameByTime = () => {
     const data = {
       is_active: value
     };
-    dispatch(changeGameByTimeValue({ id, data }));
+    dispatch(updateTeam({ id, data }));
     console.log(data);
   };
 
@@ -63,13 +71,15 @@ const GameByTime = () => {
     const data = {
       [timeValue.name]: debouncedCurrentValue
     };
-    dispatch(changeGameByTimeValue({ id: timeValue.id, data }));
+    dispatch(changeGameByTimeValue({ id: timeValue.id, data, category_id: id }));
     console.log(data);
+    setTimeValue({ name: '', value: 0, id: 0 });
   }, [debouncedCurrentValue]);
 
   useEffect(() => {
     // async function fetchData() {
-    dispatch(getAllGamesByTimeList());
+
+    dispatch(getAllGamesByTimeList({ params }));
     // setTimeout(() => {
     //   if (gameList.length === 0) {
     //     dispatch(getTeamsList());
@@ -89,9 +99,9 @@ const GameByTime = () => {
           </p>
         ))}
       </div>
-      {gameList.map((game) => (
+      {data?.map((game, index) => (
         <div key={game.team.id} className="flex items-center gap-8">
-          <p className="flex-1">{game.team.id} </p>
+          <p className="flex-1">{index + 1} </p>
           <HtmlTooltip
             title={
               <React.Fragment>
@@ -112,22 +122,28 @@ const GameByTime = () => {
           />
           <TextField
             onChange={(e) => {
-              setTimeValue({ name: 'first_time', value: +e.target.value, id: game.team.id });
+              setTimeValue({ name: 'first_time', value: +e.target.value, id: game.id });
             }}
+            onClick={() =>
+              setTimeValue({ name: 'second_time', value: game.first_time, id: game.id })
+            }
+            value={timeValue && timeValue.id === game.id ? timeValue.value : game.first_time}
             type="number"
             className="flex-1"
           />
           <TextField
             onChange={(e) => {
-              setTimeValue({ name: 'second_time', value: +e.target.value, id: game.team.id });
+              setTimeValue({ name: 'second_time', value: +e.target.value, id: game.id });
             }}
+            value={game.second_time}
             type="number"
             className="flex-1"
           />
           <TextField
             onChange={(e) => {
-              setTimeValue({ name: 'third_time', value: +e.target.value, id: game.team.id });
+              setTimeValue({ name: 'third_time', value: +e.target.value, id: game.id });
             }}
+            value={game.third_time}
             type="number"
             className="flex-1"
           />

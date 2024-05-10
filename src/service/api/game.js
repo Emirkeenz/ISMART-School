@@ -1,8 +1,8 @@
 import { client } from '../axios';
 
 class Game {
-  getAllGameResults() {
-    return client.get(`/teams/time-results/`);
+  getAllGameResults(params) {
+    return client.get(`/teams/time-results/`, { params });
   }
   startGameByTime(data) {
     return client.post(`/teams/time-results/`, data);
