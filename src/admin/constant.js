@@ -282,7 +282,7 @@ export const categoriesList = [
       participants: [],
       is_arrived: true,
       is_active: true,
-      round_robin_total: 0
+      round_robin_total: 25
     },
     team2: {
       id: 1,
@@ -312,7 +312,7 @@ export const categoriesList = [
       participants: [],
       is_arrived: true,
       is_active: true,
-      round_robin_total: 0
+      round_robin_total: 9
     },
     team2: {
       id: 1,
@@ -342,7 +342,7 @@ export const categoriesList = [
       participants: [],
       is_arrived: true,
       is_active: true,
-      round_robin_total: 0
+      round_robin_total: 17
     },
     team2: {
       id: 1,
@@ -352,7 +352,7 @@ export const categoriesList = [
       participants: [],
       is_arrived: true,
       is_active: true,
-      round_robin_total: 0
+      round_robin_total: 89
     },
     score_team1: 3,
     score_team2: 3
@@ -372,7 +372,7 @@ export const categoriesList = [
       participants: [],
       is_arrived: true,
       is_active: true,
-      round_robin_total: 0
+      round_robin_total: 12
     },
     team2: {
       id: 1,
@@ -382,7 +382,7 @@ export const categoriesList = [
       participants: [],
       is_arrived: true,
       is_active: true,
-      round_robin_total: 0
+      round_robin_total: 45
     },
     score_team1: 4,
     score_team2: 4
@@ -402,7 +402,7 @@ export const categoriesList = [
       participants: [],
       is_arrived: true,
       is_active: true,
-      round_robin_total: 0
+      round_robin_total: 67
     },
     team2: {
       id: 1,
@@ -412,7 +412,7 @@ export const categoriesList = [
       participants: [],
       is_arrived: true,
       is_active: true,
-      round_robin_total: 0
+      round_robin_total: 28
     },
     score_team1: 5,
     score_team2: 5

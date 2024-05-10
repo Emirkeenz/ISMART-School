@@ -8,7 +8,11 @@ const gameSlice = createSlice({
     error: null,
     gameList: []
   },
-  reducers: {},
+  reducers: {
+    clear(state) {
+      state.gameList = [];
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getAllGamesByTimeList.pending, (state) => {
@@ -25,5 +29,7 @@ const gameSlice = createSlice({
       });
   }
 });
+
+export const { clear } = gameSlice.actions;
 
 export default gameSlice;

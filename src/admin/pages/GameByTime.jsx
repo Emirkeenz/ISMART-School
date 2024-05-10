@@ -3,10 +3,14 @@ import { Checkbox, TextField, Tooltip, tooltipClasses, Typography } from '@mui/m
 import { participantsTableHead } from '../constant';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeGameByTimeValue, getAllGamesByTimeList } from '../../redux/game/reducer';
-import { useDebounce } from '../../utils/debounce';
-import { updateTeam } from '../../redux/teams/reducer';
+import {
+  changeGameByTimeValue,
+  getAllGamesByTimeList,
+  startGameByTime
+} from '../../redux/game/reducer';
+import { getTeamsList, updateTeam } from '../../redux/teams/reducer';
 import { useParams } from 'react-router-dom';
+import { clear } from '../../redux/game/slice';
 
 const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -21,16 +25,16 @@ const HtmlTooltip = styled(({ className, ...props }) => (
 
 const GameByTime = () => {
   const dispatch = useDispatch();
-  // const teamList = useSelector((state) => state.team.teamList);
+  const teamList = useSelector((state) => state.team.teamList);
   const gameList = useSelector((state) => state.game.gameList);
   const [timeValue, setTimeValue] = useState({ name: '', value: 0, id: 0 });
-  const [data] = useState(gameList);
-  const debouncedCurrentValue = useDebounce(timeValue.value, 1000);
+  const [data, setData] = useState([]);
+  const [gameRequest, setGameRequest] = useState(false);
+  // const debouncedCurrentValue = useDebounce(timeValue.value, 1000);
   const { id } = useParams();
 
   const params = {
     team__subcategory: id
-    // team__is_arrived: true
   };
 
   const onChangeStatusIsVisited = (value, game_id) => {
@@ -49,45 +53,69 @@ const GameByTime = () => {
     console.log(data);
   };
 
-  // const createGameForAllTeams = () => {
-  //   Promise.all(
-  //     teamList.map((team) => {
-  //       const data = {
-  //         team: team.id,
-  //         game: team.subcategory,
-  //         first_time: 0,
-  //         second_time: 0,
-  //         third_time: 0,
-  //         least_time: 0
-  //       };
-  //       dispatch(startGameByTime({ data }));
-  //     })
-  //   ).then(() => {
-  //     console.log('All team registered and games started!');
-  //   });
-  // };
-
-  useEffect(() => {
+  const onChangeValue = (field, value, game_id, game_index) => {
+    setData((prevData) => {
+      const newData = [...prevData];
+      const updatedGame = { ...newData[game_index] };
+      updatedGame[field] = value;
+      newData[game_index] = updatedGame;
+      return newData;
+    });
     const data = {
-      [timeValue.name]: debouncedCurrentValue
+      [field]: value
     };
-    dispatch(changeGameByTimeValue({ id: timeValue.id, data, category_id: id }));
-    console.log(data);
-    setTimeValue({ name: '', value: 0, id: 0 });
-  }, [debouncedCurrentValue]);
+    dispatch(changeGameByTimeValue({ id: game_id, data, category_id: id }));
+  };
+
+  const createGameForAllTeams = () => {
+    Promise.all(
+      teamList.map((team) => {
+        const data = {
+          team: team.id,
+          game: id,
+          first_time: 0,
+          second_time: 0,
+          third_time: 0,
+          least_time: 0
+        };
+        dispatch(startGameByTime({ data }));
+      })
+    ).then(() => {
+      console.log('All team registered and games started!');
+    });
+  };
+
+  // useEffect(() => {
+  //   const data = {
+  //     [timeValue.name]: debouncedCurrentValue
+  //   };
+  //   dispatch(changeGameByTimeValue({ id: timeValue.id, data, category_id: id }));
+  //   console.log(data);
+  //   setTimeValue({ name: '', value: 0, id: 0 });
+  // }, [debouncedCurrentValue]);
 
   useEffect(() => {
-    // async function fetchData() {
+    setData(gameList);
+  }, [gameList]);
 
-    dispatch(getAllGamesByTimeList({ params }));
-    // setTimeout(() => {
-    //   if (gameList.length === 0) {
-    //     dispatch(getTeamsList());
-    //     createGameForAllTeams();
-    //   }
-    // }, 1000);
-    // }
-    // fetchData();
+  useEffect(() => {
+    async function fetchData() {
+      if (gameRequest && !gameList.length) {
+        await dispatch(getTeamsList({ params: { subcategory: id } }));
+        createGameForAllTeams();
+      }
+    }
+    fetchData();
+  }, [gameRequest]);
+
+  useEffect(() => {
+    async function fetchData() {
+      await dispatch(getAllGamesByTimeList({ params }));
+      setGameRequest(true);
+    }
+    fetchData();
+
+    return () => dispatch(clear());
   }, []);
 
   return (
@@ -121,19 +149,15 @@ const GameByTime = () => {
             className="flex-1"
           />
           <TextField
-            onChange={(e) => {
-              setTimeValue({ name: 'first_time', value: +e.target.value, id: game.id });
-            }}
-            onClick={() =>
-              setTimeValue({ name: 'second_time', value: game.first_time, id: game.id })
-            }
+            onChange={(e) => onChangeValue('first_time', e.target.value, game.id, index)}
             value={timeValue && timeValue.id === game.id ? timeValue.value : game.first_time}
             type="number"
             className="flex-1"
           />
           <TextField
             onChange={(e) => {
-              setTimeValue({ name: 'second_time', value: +e.target.value, id: game.id });
+              onChangeValue('second_time', e.target.value, game.id, index);
+              setTimeValue(e.target.value);
             }}
             value={game.second_time}
             type="number"
@@ -141,14 +165,15 @@ const GameByTime = () => {
           />
           <TextField
             onChange={(e) => {
-              setTimeValue({ name: 'third_time', value: +e.target.value, id: game.id });
+              onChangeValue('third_time', e.target.value, game.id, index);
+              setTimeValue(e.target.value);
             }}
             value={game.third_time}
             type="number"
             className="flex-1"
           />
           <div className="flex-1 bg-amber-300">
-            <TextField disabled type="number" />
+            <TextField className="text-center" value={game.least_time} disabled type="number" />
           </div>
         </div>
       ))}

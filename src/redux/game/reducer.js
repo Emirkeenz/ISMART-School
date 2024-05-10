@@ -13,16 +13,20 @@ export const getAllGamesByTimeList = createAsyncThunk(
     }
   }
 );
-export const startGameByTime = createAsyncThunk('game/startGameByTime', async ({ data }) => {
-  try {
-    const response = await api.game.startGameByTime(data);
-    console.log(response);
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw error;
+export const startGameByTime = createAsyncThunk(
+  'game/startGameByTime',
+  async ({ data }, { dispatch }) => {
+    try {
+      const response = await api.game.startGameByTime(data);
+      dispatch(getAllGamesByTimeList({ params: { subcategory: data.id } }));
+      console.log('response');
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
-});
+);
 
 export const changeGameByTimeValue = createAsyncThunk(
   'game/changeGameByTimeValue',
