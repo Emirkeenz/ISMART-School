@@ -41,7 +41,7 @@ const Auth = () => {
           render={({ field, formState }) => (
             <div>
               <TextField
-                className="w-full"
+                className="w-full rounded-lg bg-white"
                 {...field}
                 key="email"
                 label="Email"
@@ -59,7 +59,7 @@ const Auth = () => {
           render={({ field, formState }) => (
             <div>
               <TextField
-                className="w-full"
+                className="w-full rounded-lg bg-white"
                 key="password"
                 {...field}
                 label="Password"

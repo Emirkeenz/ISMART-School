@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import styled from 'styled-components';
 import { getSubcategoriesList } from '../../redux/subcategories/reducer';
 import { subcategoriesForGameByTime } from '../constant';
+import { getCategoriesList } from '../../redux/categories/reducer';
 
 const List = styled.div`
   width: 100%;
@@ -31,27 +32,29 @@ const CategoryItem = styled.div`
   justify-content: center;
   align-items: center;
   gap: 15px;
-  background-color: #dbdbdb;
-  padding: 15px;
+  background-color: #ffffff;
   border-radius: 15px;
+  padding: 8px 5px;
 `;
 
-const CategoryImg = styled.img`
-  height: 180px;
-  object-fit: cover;
-  border-radius: 10px;
-`;
+// const CategoryImg = styled.img`
+//   height: 180px;
+//   object-fit: cover;
+//   border-radius: 10px;
+// `;
 
 const CategoryBody = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   gap: 5px;
 `;
 
 const Categories = () => {
   const dispatch = useDispatch();
+  const categoriesList = useSelector((state) => state.category.categoriesList);
   const subcategoryList = useSelector((state) => state.subcategory.subcategoriesList);
   const navigate = useNavigate();
 
@@ -66,43 +69,55 @@ const Categories = () => {
   };
 
   useEffect(() => {
+    dispatch(getCategoriesList());
     dispatch(getSubcategoriesList());
   }, []);
 
   return (
-    <div>
-      <div style={{ padding: '25px 0' }}>
-        <List>
-          {subcategoryList.map((subcategory) => (
-            <CategoryItem key={subcategory.id}>
-              <CategoryImg variant="top" src={subcategory.photo} />
-              <CategoryBody>
-                <h2>{subcategory.name}</h2>
-              </CategoryBody>
-              <div
-                onClick={() => referToGamePage(subcategory)}
-                style={{
-                  textDecoration: 'none',
-                  color: '#1a1a1a',
-                  width: '80%',
-                  transition: 'none'
-                }}>
-                <Button
-                  variant="primary"
-                  style={{
-                    width: '100%',
-                    background: '#000F38',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '15px'
-                  }}>
-                  Перейти
-                </Button>
-              </div>
-            </CategoryItem>
-          ))}
-        </List>
-      </div>
+    <div style={{ padding: '25px 0' }}>
+      {categoriesList &&
+        categoriesList.map((category) => (
+          <div key={category.id} style={{ width: '100%', textAlign: 'center' }}>
+            <h1
+              style={{ color: 'black', marginBottom: '15px', fontSize: '38px', fontWeight: '600' }}>
+              {category.name}
+            </h1>
+            <List>
+              {subcategoryList &&
+                subcategoryList
+                  .filter((subcategory) => subcategory.category.id === category.id)
+                  .map((subcategory) => (
+                    <CategoryItem key={subcategory.id}>
+                      {/* <CategoryImg variant="top" src={subcategory.photo} /> */}
+                      <CategoryBody>
+                        <h2>{subcategory.name}</h2>
+                      </CategoryBody>
+                      <div
+                        onClick={() => referToGamePage(subcategory)}
+                        style={{
+                          textDecoration: 'none',
+                          color: '#1a1a1a',
+                          width: '80%',
+                          transition: 'none'
+                        }}>
+                        <Button
+                          variant="primary"
+                          style={{
+                            width: '100%',
+                            background: '#f1f1f1',
+                            color: '#151515',
+                            border: '1px solid #1d1d1d',
+                            borderRadius: '8px',
+                            padding: '8px 5px'
+                          }}>
+                          Перейти
+                        </Button>
+                      </div>
+                    </CategoryItem>
+                  ))}
+            </List>
+          </div>
+        ))}
     </div>
   );
 };
