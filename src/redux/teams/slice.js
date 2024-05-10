@@ -8,7 +8,11 @@ const teamSlice = createSlice({
     error: null,
     teamList: []
   },
-  reducers: {},
+  reducers: {
+    clearTeamList(state) {
+      state.teamList = [];
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getTeamsList.pending, (state) => {
@@ -25,5 +29,7 @@ const teamSlice = createSlice({
       });
   }
 });
+
+export const { clearTeamList } = teamSlice.actions;
 
 export default teamSlice;
