@@ -1,40 +1,5 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { categoriesList } from '../constant';
-
-const Table = styled.table`
-  border-collapse: collapse;
-  border: 1px solid #e2e8f0;
-`;
-
-const Th = styled.th`
-  border: 1px solid #e2e8f0;
-  padding: 0.5rem;
-`;
-
-const Td = styled.td`
-  border: 1px solid #e2e8f0;
-  padding: 0.5rem;
-`;
-
-const Input = styled.input`
-  border: 2px solid #e2e8f0;
-  padding: 0.5rem;
-`;
-
-const Button = styled.button`
-  background-color: #3b82f6;
-  color: #fff;
-  font-weight: 700;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  border: none;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #2563eb;
-  }
-`;
+import React, { useEffect, useState } from 'react';
+import { categoriesList, categoriesListHead } from '../constant';
 
 const GameByTable = () => {
   const [value, setValue] = useState();
@@ -48,31 +13,56 @@ const GameByTable = () => {
 
   return (
     <div>
-      <Table>
+      <table className="">
         <thead>
           <tr>
-            {categoriesList.map((item) => (
-              <Th key={item.id}>{item.name}</Th>
+            {categoriesListHead.map((item) => (
+              <th key={item.id}>{item.team1?.name}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {categoriesList.map((item) => (
-            <tr key={item.id}>
-              <Td>{item.name}</Td>
-              <Td>
-                <Input type="text" />
-              </Td>
-              <Td>
-                <Input type="text" />
-              </Td>
+          {categoriesList.map((row) => (
+            <tr key={row.id}>
+              <td>
+                <p className="w-40 font-bold">{row.team1.name}</p>
+              </td>
+              {categoriesList.map((col, index) => (
+                <td key={col.id}>
+                  <div
+                    className={`border-2 h-16 p-3 flex items-center ${row.id === categoriesListHead[index + 1]?.id && 'bg-amber-200'}`}>
+                    {row.id !== categoriesListHead[index + 1].id && (
+                      <>
+                        <input
+                          className="border h-full w-10 m-1 text-center"
+                          onChange={(e) => {
+                            setTeam1(row);
+                            setTeam2(categoriesListHead[index + 1]);
+                            setValue(e.target.value);
+                          }}
+                          value={col.score_team1}
+                          type="text"
+                        />
+                        :
+                        <input
+                          className="border h-full w-10 m-1 text-center"
+                          onChange={(e) => {
+                            setTeam1(row);
+                            setTeam2(categoriesListHead[index + 1]);
+                            setValue(e.target.value);
+                          }}
+                          value={col.score_team2}
+                          type="text"
+                        />
+                      </>
+                    )}
+                  </div>
+                </td>
+              ))}
             </tr>
           ))}
         </tbody>
-      </Table>
-      <hr />
-      <Input type="text" value={message} onChange={updateMessage} />
-      <Button onClick={handleClick}>Add Item</Button>
+      </table>
     </div>
   );
 };
