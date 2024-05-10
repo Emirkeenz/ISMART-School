@@ -17,7 +17,7 @@ const gameSlice = createSlice({
       })
       .addCase(getAllGamesByTimeList.fulfilled, (state, action) => {
         state.loading = false;
-        state.gameList = action.payload;
+        state.gameList = action.payload.results;
       })
       .addCase(getAllGamesByTimeList.rejected, (state, action) => {
         state.loading = false;

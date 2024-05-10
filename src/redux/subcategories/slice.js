@@ -17,7 +17,7 @@ const subcategorySlice = createSlice({
       })
       .addCase(getSubcategoriesList.fulfilled, (state, action) => {
         state.loading = false;
-        state.subcategoriesList = action.payload;
+        state.subcategoriesList = action.payload.results;
       })
       .addCase(getSubcategoriesList.rejected, (state, action) => {
         state.loading = false;
