@@ -5,17 +5,24 @@ const teamSlice = createSlice({
   name: 'team',
   initialState: {
     loading: false,
-    success: false,
-    error: false,
+    error: null,
     teamList: []
   },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getTeamsList.fulfilled, (state, action) => {
-      state.loading = false;
-      state.error = null;
-      state.teamList = action.payload;
-    });
+    builder
+      .addCase(getTeamsList.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getTeamsList.fulfilled, (state, action) => {
+        state.loading = false;
+        state.teamList = action.payload.results;
+      })
+      .addCase(getTeamsList.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
   }
 });
 

@@ -5,6 +5,7 @@ import { getAllGamesByTimeList } from '../game/reducer';
 export const getTeamsList = createAsyncThunk('team/getTeamsList', async () => {
   try {
     const response = await api.team.getTeamList();
+    console.log(response);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -14,10 +15,10 @@ export const getTeamsList = createAsyncThunk('team/getTeamsList', async () => {
 
 export const updateTeam = createAsyncThunk(
   'team/updateTeam',
-  async ({ id, data }, { dispatch }) => {
+  async ({ id, data, category_id }, { dispatch }) => {
     try {
       const response = await api.team.updateTeam({ id, data });
-      dispatch(getAllGamesByTimeList());
+      dispatch(getAllGamesByTimeList({ params: { team__subcategory: category_id } }));
       return response.data;
     } catch (error) {
       console.error(error);
