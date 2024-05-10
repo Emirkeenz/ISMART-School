@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getSubcategoriesList } from '../../../redux/subcategories/reducer';
 import { useParams } from 'react-router-dom';
 import { getTeamsList } from '../../../redux/teams/reducer';
+import { clearTeamList } from '../../../redux/teams/slice';
 
 const SubcategoryDescription = styled.div`
   width: 100%;
@@ -93,18 +94,18 @@ const Subcategory = () => {
   const { id } = useParams(); // Extract subcategory ID from URL parameters
   const dispatch = useDispatch();
   const subcategoriesList = useSelector((state) => state.subcategory.subcategoriesList);
+  const teamsList = useSelector((state) => state.team.teamList);
   const selectedSubcategory = subcategoriesList.find(
     (subcategory) => subcategory.id === parseInt(id)
   );
 
-  const teamsList = useSelector((state) => state.team.getTeamList);
-
-  // Filter teams based on the selected subcategory
-  // const filteredTeams = teamsList.filter((team) => team.subcategoryId === parseInt(id));
-
   useEffect(() => {
     dispatch(getSubcategoriesList());
-    dispatch(getTeamsList());
+    dispatch(getTeamsList({ params: { subcategory: id } }));
+
+    return () => {
+      dispatch(clearTeamList());
+    };
   }, []);
 
   return (
@@ -141,8 +142,8 @@ const Subcategory = () => {
               <Team key={team.id}>
                 <span>{team.name}</span>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                  <span>Score: {team.score}pts</span>
-                  <span>Status: {team.status}</span>
+                  {/* <span>Score: {team.score}pts</span>
+                  <span>Status: {team.status}</span> */}
                 </div>
               </Team>
             ))}
