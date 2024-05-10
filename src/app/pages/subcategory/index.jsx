@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/footer';
 import { StemEducationVideo } from '../../assets';
@@ -8,6 +8,8 @@ import { getSubcategoriesList } from '../../../redux/subcategories/reducer';
 import { useParams } from 'react-router-dom';
 import { getTeamsList } from '../../../redux/teams/reducer';
 import { clearTeamList } from '../../../redux/teams/slice';
+import { getAllGamesByTimeList } from '../../../redux/game/reducer';
+import { clearGameList } from '../../../redux/game/slice';
 
 const SubcategoryDescription = styled.div`
   width: 100%;
@@ -95,18 +97,46 @@ const Subcategory = () => {
   const dispatch = useDispatch();
   const subcategoriesList = useSelector((state) => state.subcategory.subcategoriesList);
   const teamsList = useSelector((state) => state.team.teamList);
+  const gamesList = useSelector((state) => state.game.gameList);
   const selectedSubcategory = subcategoriesList.find(
     (subcategory) => subcategory.id === parseInt(id)
   );
 
+  const [numTeams, setNumTeams] = useState(0);
+  const [maxScore, setMaxScore] = useState(0);
+  const [leaderName, setLeaderName] = useState('');
+
   useEffect(() => {
     dispatch(getSubcategoriesList());
     dispatch(getTeamsList({ params: { subcategory: id } }));
+    dispatch(getAllGamesByTimeList({ params: { team: id } }));
 
     return () => {
+      dispatch(clearGameList());
       dispatch(clearTeamList());
     };
   }, []);
+
+  useEffect(() => {
+    // Calculate the number of teams
+    if (teamsList) {
+      setNumTeams(teamsList.length);
+    }
+
+    // Calculate the maximum score
+    if (gamesList) {
+      let max = 0;
+      let leader = '';
+      gamesList.forEach((game) => {
+        if (game.score > max) {
+          max = game.score;
+          leader = game.team.name;
+        }
+      });
+      setMaxScore(max);
+      setLeaderName(leader);
+    }
+  }, [teamsList, gamesList]);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -122,11 +152,11 @@ const Subcategory = () => {
           </DescriptionItem>
           <DescriptionItem>
             <span>Количество команд</span>
-            <span>15</span>
+            <span>{numTeams}</span>
           </DescriptionItem>
           <LeaderDescriptionItem>
-            <span>Лидер</span>
-            <span>45pts</span>
+            <span>Лидер: {leaderName}</span>
+            <span>{maxScore} pts</span>
           </LeaderDescriptionItem>
         </Description>
       </SubcategoryDescription>
@@ -142,8 +172,14 @@ const Subcategory = () => {
               <Team key={team.id}>
                 <span>{team.name}</span>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                  {/* <span>Score: {team.score}pts</span>
-                  <span>Status: {team.status}</span> */}
+                  {(() => {
+                    // Find all games associated with the current team
+                    const teamGames = gamesList.filter((game) => game.team.name === team.name);
+                    // Calculate the total score from the found games
+                    const totalScore = teamGames.reduce((acc, curr) => acc + curr.score, 0);
+
+                    return <span>Score: {totalScore}pts</span>;
+                  })()}
                 </div>
               </Team>
             ))}
