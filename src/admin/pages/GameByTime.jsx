@@ -10,7 +10,8 @@ import {
 } from '../../redux/game/reducer';
 import { getTeamsList, updateTeam } from '../../redux/teams/reducer';
 import { useParams } from 'react-router-dom';
-import { clear } from '../../redux/game/slice';
+import { clearGameList } from '../../redux/game/slice';
+import { clearTeamList } from '../../redux/teams/slice';
 
 const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -115,7 +116,10 @@ const GameByTime = () => {
     }
     fetchData();
 
-    return () => dispatch(clear());
+    return () => {
+      dispatch(clearGameList());
+      dispatch(clearTeamList());
+    };
   }, []);
 
   return (
