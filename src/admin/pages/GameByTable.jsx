@@ -37,17 +37,14 @@ const Button = styled.button`
 `;
 
 const GameByTable = () => {
-  const [message, setMessage] = useState('');
-  const [items, setItems] = useState([]);
+  const [value, setValue] = useState();
+  const [team1, setTeam1] = useState();
+  const [team2, setTeam2] = useState();
 
-  const updateMessage = (event) => {
-    setMessage(event.target.value);
-  };
-
-  const handleClick = () => {
-    setItems([...items, message]);
-    setMessage('');
-  };
+  useEffect(() => {
+    if (value) console.log(value, team1, team2);
+    setValue(0);
+  }, [value]);
 
   return (
     <div>

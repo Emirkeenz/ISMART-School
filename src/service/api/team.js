@@ -1,8 +1,8 @@
 import { client } from '../axios';
 
 class Team {
-  getTeamList() {
-    return client.get('/teams/teams');
+  getTeamList(params) {
+    return client.get('/teams/teams', { params });
   }
   createTeam(data) {
     return client.post('/teams/teams', data);
