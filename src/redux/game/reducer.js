@@ -6,6 +6,7 @@ export const getAllGamesByTimeList = createAsyncThunk(
   async ({ params }) => {
     try {
       const response = await api.game.getAllGameResults(params);
+      console.log(response.data.results);
       return response.data;
     } catch (error) {
       console.error(error);
