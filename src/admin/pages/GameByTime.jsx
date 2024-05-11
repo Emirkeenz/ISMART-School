@@ -138,7 +138,7 @@ const GameByTime = () => {
       {data?.map((game, index) => (
         <div
           key={game.team.id}
-          className={`flex items-center gap-8 ${game.team.is_active === true && 'bg-amber-300'}`}>
+          className={`flex items-center gap-8 ${game.team.is_active === false && 'bg-amber-300'}`}>
           <p className="flex-1">{index + 1} </p>
           <HtmlTooltip
             title={
