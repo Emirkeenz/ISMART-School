@@ -64,7 +64,7 @@ const Categories = () => {
     if (subcategoriesForGameByTime.includes(subcategory.name)) {
       navigate(`/admin/game-time/${subcategory.id}`);
     } else {
-      navigate(`/admin/game-table/${subcategory.id}`);
+      navigate(`/admin/game-table2/${subcategory.id}`);
     }
   };
 

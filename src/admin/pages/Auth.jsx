@@ -6,12 +6,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/auth';
+import { useNavigate } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom';
 
 const Auth = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const dataFromLocal = localStorage.getItem('data');
+  const dataFromLocal = JSON.parse(localStorage.getItem('data'));
 
   const authSchema = z.object({
     email: z.string().email(),
@@ -25,8 +26,9 @@ const Auth = () => {
   const handleCreate = async (data) => {
     console.log(data);
     await dispatch(login(data));
-    // if (dataFromLocal.role === 'Admin') navigate('/admin/categories');
-    // else navigate('/admin/game-time');
+    console.log({ dataFromLocal });
+    if (dataFromLocal.role == 'Админ') navigate('/admin/categories');
+    else navigate('/admin/game-time');
   };
 
   return (
