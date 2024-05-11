@@ -1,12 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAllGamesByTimeList } from './reducer';
+import { getAllGamesByRoundRobin, getAllGamesByTimeList, getAllSumoFinalists } from './reducer';
 
 const gameSlice = createSlice({
   name: 'game',
   initialState: {
     loading: false,
     error: null,
-    gameList: []
+    gameList: [],
+    gameRoundRobinList: [],
+    sumoFinalists: []
   },
   reducers: {
     clearGameList(state) {
@@ -26,6 +28,14 @@ const gameSlice = createSlice({
       .addCase(getAllGamesByTimeList.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      })
+      .addCase(getAllGamesByRoundRobin.fulfilled, (state, action) => {
+        state.loading = false;
+        state.gameRoundRobinList = action.payload.results;
+      })
+      .addCase(getAllSumoFinalists.fulfilled, (state, action) => {
+        state.loading = false;
+        state.sumoFinalists = action.payload.results;
       });
   }
 });

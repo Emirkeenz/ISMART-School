@@ -43,3 +43,41 @@ export const changeGameByTimeValue = createAsyncThunk(
     }
   }
 );
+
+export const startGameByRoundRobin = createAsyncThunk(
+  'game/startGameByRoundRobin',
+  async ({ data }) => {
+    try {
+      const response = await api.game.startGameByRoundRobin(data);
+      // dispatch(getAllGamesByTimeList({ params: { subcategory: data.id } }));
+      console.log('response');
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+);
+
+export const getAllGamesByRoundRobin = createAsyncThunk(
+  'game/getAllGamesByRoundRobin',
+  async ({ params }) => {
+    try {
+      const response = await api.game.getAllGameRoundRobinResults(params);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+);
+
+export const getAllSumoFinalists = createAsyncThunk('game/getAllSumoFinalists', async () => {
+  try {
+    const response = await api.game.getAllSumoFinalists();
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+});

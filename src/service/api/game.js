@@ -10,6 +10,18 @@ class Game {
   changeGameValueByTime(id, data) {
     return client.patch(`/teams/time-results/${id}/`, data);
   }
+
+  startGameByRoundRobin(data) {
+    return client.post(`/teams/round-robin-match/`, data);
+  }
+
+  getAllGameRoundRobinResults(params) {
+    return client.get(`/teams/round-robin-match/`, { params });
+  }
+
+  getAllSumoFinalists() {
+    return client.get(`https://ismart-olympiad-ratings-922a3ab18f63.herokuapp.com/sumo-finalists/`);
+  }
 }
 
 export default Game;
