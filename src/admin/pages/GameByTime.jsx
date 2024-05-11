@@ -30,6 +30,7 @@ const GameByTime = () => {
   const gameList = useSelector((state) => state.game.gameList);
   const [timeValue, setTimeValue] = useState({ name: '', value: 0, id: 0 });
   const [data, setData] = useState([]);
+  const [active, setActive] = useState(true);
   // const [gameRequest, setGameRequest] = useState(false);
   // const debouncedCurrentValue = useDebounce(timeValue.value, 1000);
   const { id } = useParams();
@@ -48,11 +49,12 @@ const GameByTime = () => {
     console.log(data);
   };
 
-  const onChangeStatusIsActive = (value, id) => {
+  const onChangeStatusIsActive = (value, game_id) => {
+    setActive(value);
     const data = {
       is_active: value
     };
-    dispatch(updateTeam({ id, data }));
+    dispatch(updateTeam({ id: game_id, data, category_id: id }));
     console.log(data);
   };
 
@@ -147,7 +149,7 @@ const GameByTime = () => {
                 <Typography color="inherit">{game.game.name}</Typography>
               </React.Fragment>
             }>
-            <p onClick={() => onChangeStatusIsActive(true, game.team.id)} className="flex-1">
+            <p onClick={() => onChangeStatusIsActive(!active, game.team.id)} className="flex-1">
               {game.team.name}
             </p>
           </HtmlTooltip>
