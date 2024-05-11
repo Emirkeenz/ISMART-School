@@ -10,6 +10,7 @@ import { getTeamsList } from '../../../redux/teams/reducer';
 import { clearTeamList } from '../../../redux/teams/slice';
 import { getAllGamesByTimeList } from '../../../redux/game/reducer';
 import { clearGameList } from '../../../redux/game/slice';
+import { subcategoriesForGameByTime } from '../../../admin/constant';
 
 const SubcategoryDescription = styled.div`
   width: 100%;
@@ -110,7 +111,7 @@ const Subcategory = () => {
   useEffect(() => {
     dispatch(getSubcategoriesList());
     dispatch(getTeamsList({ params: { subcategory: id } }));
-    dispatch(getAllGamesByTimeList({ params: { team: id } }));
+    dispatch(getAllGamesByTimeList({ params: { team__subcategory: id } }));
 
     return () => {
       dispatch(clearGameList());
@@ -176,14 +177,10 @@ const Subcategory = () => {
               <Team key={team.id}>
                 <span>{team.name}</span>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                  {(() => {
-                    // Find all games associated with the current team
-                    const teamGames = gamesList.filter((game) => game.team.name === team.name);
-                    // Calculate the total score from the found games
-                    const totalScore = teamGames.reduce((acc, curr) => acc + curr.score, 0);
-
-                    return <span>Score: {totalScore}pts</span>;
-                  })()}
+                  <p>Счет:</p>
+                  {subcategoriesForGameByTime.includes(team.subcategory.name)
+                    ? gamesList.find((item) => item.team1.id === team.id).least_time
+                    : team.round_robin_total}
                 </div>
               </Team>
             ))}
