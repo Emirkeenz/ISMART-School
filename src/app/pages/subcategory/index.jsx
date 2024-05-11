@@ -90,6 +90,7 @@ const Team = styled.li`
   padding: 15px 15px;
   border-radius: 15px;
   background-color: #ffffff;
+  /* background-color: ${(props) => (props.dark ? '#fcfcfc' : '#ffffff')}; */
 `;
 
 const Subcategory = () => {
@@ -161,9 +162,12 @@ const Subcategory = () => {
         </Description>
       </SubcategoryDescription>
       {selectedSubcategory && (
-        <h1 style={{ color: '#000', fontSize: '36px', textAlign: 'center' }}>
-          Список команд - {selectedSubcategory.name}
-        </h1>
+        <div style={{ width: '100%', paddingLeft: '10%', paddingRight: '10%' }}>
+          <h1 style={{ color: '#000', fontSize: '36px', textAlign: 'center' }}>
+            Список команд - {selectedSubcategory.name}
+          </h1>
+          <p>{selectedSubcategory.description}</p>
+        </div>
       )}
       <TeamsListContainer>
         <TeamsList>
